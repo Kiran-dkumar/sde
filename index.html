@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-Month SDE Job Preparation Schedule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .schedule-info {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .time-slot {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .month-container {
+            padding: 30px;
+        }
+        
+        .month {
+            margin-bottom: 40px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .month-header {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .weeks {
+            padding: 20px;
+        }
+        
+        .week {
+            margin-bottom: 25px;
+            border-left: 4px solid #74b9ff;
+            padding-left: 20px;
+        }
+        
+        .week h4 {
+            color: #2d3436;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .week h4::before {
+            content: "📅";
+            margin-right: 10px;
+        }
+        
+        .daily-schedule {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .day-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            border-left: 4px solid #00b894;
+        }
+        
+        .day-card h5 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .topic {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px 0;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .practice-problems {
+            background: #e17055;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        .important-note {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+        
+        .tips {
+            background: #00b894;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .tips h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .tips ul {
+            list-style: none;
+        }
+        
+        .tips li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .tips li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; }
+            .print-btn { display: none; }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .time-slots { grid-template-columns: 1fr; }
+            .daily-schedule { grid-template-columns: 1fr; }
+            .print-btn { position: static; margin: 20px auto; display: block; }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">🖨️ Print/Save as PDF</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>4-Month SDE Job Preparation Schedule</h1>
+            <p>Comprehensive DSA & Interview Prep for Working Professionals</p>
+        </div>
+        
+        <div class="schedule-info">
+            <div class="time-slots">
+                <div class="time-slot">
+                    <strong>Morning Session</strong><br>
+                    6:00 AM - 8:00 AM<br>
+                    (2 hours daily)
+                </div>
+                <div class="time-slot">
+                    <strong>Evening Session</strong><br>
+                    9:00 PM - 10:30 PM<br>
+                    (1.5 hours daily)
+                </div>
+                <div class="time-slot">
+                    <strong>Weekend Deep Dive</strong><br>
+                    Saturday: 4 hours<br>
+                    Sunday: 3 hours
+                </div>
+            </div>
+            
+            <div class="important-note">
+                <strong>📌 Important:</strong> Work Schedule: 11 AM - 8 PM | Total Study Time: 3.5 hours weekdays, 7 hours weekends
+            </div>
+        </div>
+        
+        <div class="month-container">
+            <!-- Month 1: Foundation Building -->
+            <div class="month">
+                <div class="month-header">Month 1: Foundation Building & Basic DSA</div>
+                <div class="weeks">
+                    <div class="week">
+                        <h4>Week 1: Arrays & Basic Problem Solving</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Thursday (Daily)</h5>
+                                <div class="topic">Arrays Fundamentals</div>
+                                <div class="topic">Two Pointer Technique</div>
+                                <div class="practice-problems">
+                                    <strong>Daily Problems (3-4):</strong><br>
+                                    • Two Sum, Best Time to Buy Stock<br>
+                                    • Container With Most Water<br>
+                                    • Remove Duplicates from Sorted Array
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Friday</h5>
+                                <div class="topic">Array Rotation & Sliding Window</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Rotate Array, Maximum Subarray, Sliding Window Maximum
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Array Practice Marathon</div>
+                                <div class="practice-problems">
+                                    <strong>Solve 15-20 array problems</strong><br>
+                                    Focus on: Sorting, Searching, Matrix problems
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 2: Strings & Pattern Matching</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Wednesday</h5>
+                                <div class="topic">String Basics & Manipulation</div>
+                                <div class="practice-problems">
+                                    <strong>Daily Problems:</strong><br>
+                                    • Valid Palindrome, Longest Common Prefix<br>
+                                    • String to Integer (atoi), Reverse String
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Thursday - Friday</h5>
+                                <div class="topic">Pattern Matching & KMP Algorithm</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Implement strStr(), Longest Palindromic Substring
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">String & Array Mixed Practice</div>
+                                <div class="practice-problems">
+                                    <strong>20+ problems combining arrays and strings</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 3: Linked Lists</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Tuesday</h5>
+                                <div class="topic">Linked List Basics</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Reverse Linked List, Middle of Linked List, Delete Node
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Wednesday - Friday</h5>
+                                <div class="topic">Advanced Linked List</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Merge Two Sorted Lists, Detect Cycle, Remove Nth Node
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Linked List Marathon</div>
+                                <div class="practice-problems">
+                                    <strong>15+ linked list problems</strong><br>
+                                    Include: Doubly linked lists, Complex operations
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 4: Stacks & Queues</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Wednesday</h5>
+                                <div class="topic">Stack Implementation & Applications</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Valid Parentheses, Min Stack, Evaluate RPN
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Thursday - Friday</h5>
+                                <div class="topic">Queue & Deque</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Implement Queue using Stacks, Sliding Window Maximum
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Month 1 Revision</div>
+                                <div class="practice-problems">
+                                    <strong>Solve 25+ mixed problems</strong> from all topics covered
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Month 2: Intermediate DSA -->
+            <div class="month">
+                <div class="month-header">Month 2: Trees, Graphs & Recursion</div>
+                <div class="weeks">
+                    <div class="week">
+                        <h4>Week 5-6: Binary Trees & BST</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Week 5: Binary Tree Basics</h5>
+                                <div class="topic">Tree Traversals (Inorder, Preorder, Postorder)</div>
+                                <div class="practice-problems">
+                                    <strong>Daily Problems:</strong><br>
+                                    • Maximum Depth of Binary Tree<br>
+                                    • Same Tree, Symmetric Tree<br>
+                                    • Path Sum, Binary Tree Paths
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Week 6: Binary Search Trees</h5>
+                                <div class="topic">BST Operations & Validation</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong><br>
+                                    • Validate BST, Kth Smallest in BST<br>
+                                    • Convert Sorted Array to BST<br>
+                                    • Lowest Common Ancestor in BST
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 7: Advanced Trees</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Wednesday</h5>
+                                <div class="topic">Tree Construction & Modification</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Construct Binary Tree from Traversals, Flatten Binary Tree
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Thursday - Friday</h5>
+                                <div class="topic">Tries & Segment Trees</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Implement Trie, Word Search II, Range Sum Query
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Tree Practice Marathon</div>
+                                <div class="practice-problems">
+                                    <strong>25+ tree problems</strong> covering all tree types
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 8: Graph Algorithms</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Tuesday</h5>
+                                <div class="topic">Graph Representation & BFS/DFS</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Number of Islands, Clone Graph, Course Schedule
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Wednesday - Friday</h5>
+                                <div class="topic">Advanced Graph Algorithms</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Dijkstra's Algorithm, Topological Sort, Union Find
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Graph Practice</div>
+                                <div class="practice-problems">
+                                    <strong>20+ graph problems</strong> including shortest path and connectivity
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Month 3: Advanced Concepts -->
+            <div class="month">
+                <div class="month-header">Month 3: Dynamic Programming & Advanced Topics</div>
+                <div class="weeks">
+                    <div class="week">
+                        <h4>Week 9-10: Dynamic Programming</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Week 9: DP Fundamentals</h5>
+                                <div class="topic">1D DP Problems</div>
+                                <div class="practice-problems">
+                                    <strong>Daily Problems:</strong><br>
+                                    • Fibonacci, Climbing Stairs<br>
+                                    • House Robber, Maximum Subarray<br>
+                                    • Coin Change, Word Break
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Week 10: 2D DP & Advanced</h5>
+                                <div class="topic">2D DP & String DP</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong><br>
+                                    • Unique Paths, Minimum Path Sum<br>
+                                    • Longest Common Subsequence<br>
+                                    • Edit Distance, Regular Expression
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 11: Backtracking & Bit Manipulation</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Wednesday</h5>
+                                <div class="topic">Backtracking</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> N-Queens, Sudoku Solver, Generate Parentheses
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Thursday - Friday</h5>
+                                <div class="topic">Bit Manipulation</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Single Number, Power of Two, Counting Bits
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Mixed Advanced Practice</div>
+                                <div class="practice-problems">
+                                    <strong>20+ problems</strong> combining DP, backtracking, and bit manipulation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 12: Heaps & Advanced Data Structures</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Wednesday</h5>
+                                <div class="topic">Priority Queues & Heaps</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> Kth Largest Element, Merge k Sorted Lists, Top K Frequent
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Thursday - Friday</h5>
+                                <div class="topic">Hash Maps & Advanced Structures</div>
+                                <div class="practice-problems">
+                                    <strong>Problems:</strong> LRU Cache, Design Data Structures, Implement HashMap
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Month 3 Comprehensive Review</div>
+                                <div class="practice-problems">
+                                    <strong>30+ mixed problems</strong> from all advanced topics
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Month 4: Interview Preparation -->
+            <div class="month">
+                <div class="month-header">Month 4: Interview Preparation & System Design</div>
+                <div class="weeks">
+                    <div class="week">
+                        <h4>Week 13-14: Company-Specific Preparation</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Week 13: FAANG Pattern Problems</h5>
+                                <div class="topic">Google/Meta Style Problems</div>
+                                <div class="practice-problems">
+                                    <strong>Focus Areas:</strong><br>
+                                    • System design basics<br>
+                                    • Behavioral questions prep<br>
+                                    • Company-specific problem patterns<br>
+                                    • Communication during problem solving
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Week 14: Mock Interviews & Communication</h5>
+                                <div class="topic">Timed Problem Solving + Soft Skills</div>
+                                <div class="practice-problems">
+                                    <strong>Daily:</strong> 2-3 problems in 45-minute sessions<br>
+                                    Practice explaining solutions aloud + record yourself<br>
+                                    <strong>Communication Focus:</strong> Clear problem understanding, solution explanation, edge cases discussion
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 15: System Design & Final Preparation</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Wednesday</h5>
+                                <div class="topic">System Design Fundamentals</div>
+                                <div class="practice-problems">
+                                    <strong>Topics:</strong> Scalability, Load Balancing, Databases, Caching
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Thursday - Friday</h5>
+                                <div class="topic">Resume & Communication Skills</div>
+                                <div class="practice-problems">
+                                    <strong>Tasks:</strong> Update resume, prepare project explanations, practice explaining technical concepts clearly, GitHub cleanup
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Comprehensive Mock Tests</div>
+                                <div class="practice-problems">
+                                    <strong>Full interview simulations</strong> with time constraints
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week">
+                        <h4>Week 16: Final Sprint & Interview Ready</h4>
+                        <div class="daily-schedule">
+                            <div class="day-card">
+                                <h5>Monday - Friday</h5>
+                                <div class="topic">Final Review & Light Practice</div>
+                                <div class="practice-problems">
+                                    <strong>Daily:</strong> 1-2 easy problems for confidence<br>
+                                    Review key concepts and patterns
+                                </div>
+                            </div>
+                            <div class="day-card">
+                                <h5>Weekend</h5>
+                                <div class="topic">Interview Preparation</div>
+                                <div class="practice-problems">
+                                    <strong>Focus:</strong> Behavioral questions, salary negotiation, final preparations
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tips">
+            <h3>💬 Communication & Soft Skills Improvement (Daily 15-20 mins)</h3>
+            <ul>
+                <li><strong>Week 1-4:</strong> Practice explaining basic algorithms aloud while coding</li>
+                <li><strong>Week 5-8:</strong> Record yourself solving problems and explaining approach</li>
+                <li><strong>Week 9-12:</strong> Mock technical interviews focusing on clear communication</li>
+                <li><strong>Week 13-16:</strong> Behavioral interview practice + salary negotiation skills</li>
+                <li><strong>Daily Practice:</strong> Explain one concept to yourself in simple terms</li>
+                <li><strong>English Fluency:</strong> Read tech articles aloud for 10 mins daily</li>
+                <li><strong>Confidence Building:</strong> Practice the STAR method for behavioral questions</li>
+                <li><strong>Body Language:</strong> Practice video calls with proper posture and eye contact</li>
+            </ul>
+        </div>
+        
+        <div class="tips">
+            <h3>🎯 Success Tips for Working Professionals</h3>
+            <ul>
+                <li><strong>Consistency over Intensity:</strong> 3.5 hours daily is better than sporadic long sessions</li>
+                <li><strong>Active Learning:</strong> Write code by hand during morning sessions to improve retention</li>
+                <li><strong>Weekend Deep Dives:</strong> Use weekends for comprehensive practice and review</li>
+                <li><strong>Mock Interviews:</strong> Practice with friends or online platforms weekly from Month 2</li>
+                <li><strong>Track Progress:</strong> Maintain a problem-solving log and review weekly</li>
+                <li><strong>Health First:</strong> Don't compromise sleep - early morning sessions require 7+ hours sleep</li>
+                <li><strong>Spaced Repetition:</strong> Revisit problems after 1 week, 1 month intervals</li>
+                <li><strong>Company Research:</strong> Start researching target companies from Month 3</li>
+                <li><strong>Network Building:</strong> Connect with professionals in target companies</li>
+                <li><strong>Backup Plans:</strong> Apply to multiple companies, don't put all eggs in one basket</li>
+                <li><strong>Rejection Recovery:</strong> Learn from feedback, stay motivated, every "no" brings you closer to "yes"</li>
+                <li><strong>Communication is Key:</strong> Technical skills get you to the interview, communication skills get you the job</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Add some interactivity for better user experience
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.day-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                    this.style.transition = 'all 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Add progress tracking functionality
+            let completedDays = parseInt(localStorage.getItem('completedDays') || '0');
+            
+            // Add checkboxes for tracking progress (but avoid localStorage as per instructions)
+            cards.forEach((card, index) => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.style.cssText = 'position: absolute; top: 10px; right: 10px; transform: scale(1.5);';
+                card.style.position = 'relative';
+                card.appendChild(checkbox);
+                
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        card.style.opacity = '0.7';
+                        card.style.background = '#d4edda';
+                    } else {
+                        card.style.opacity = '1';
+                        card.style.background = '#f8f9fa';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
